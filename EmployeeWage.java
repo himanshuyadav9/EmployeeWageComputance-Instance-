@@ -1,43 +1,49 @@
 public class EmployeeWage
 {
- private final int isFullTime;
-	    private final int isPartTime;
-	    private final int empRatePerHour;
-	    
-	    public PartTime(int isFullTime ,int isPartTime, int empRatePerHour)
-	    {
-	    	this.isFullTime=isFullTime;
-	    	this.isPartTime=isPartTime;
-	    	this.empRatePerHour=empRatePerHour;
-	    }
-	    
-	    public void empWage()
-	    {
-	    	int empWage;
-	    	int empHour=0;
+         //constants
+	private final int ISFULLTIME=1;
+	private final int ISPARTTIME=2;
+	
+	//variables
+	private final int empRate;
+	
+    public EmployeeWage(int empRate)
+    {
+    	this.empRate=empRate;
+    }
+    
+	public void empWage() {
+		int empHour = empCheck();
+		int empWage = empHour * empRate;
+		System.out.println("Employee Wage: " + empWage);
+	}
 
-	    	double empCheck = (int) ((Math.random()*10)%3);
-	    	if(empCheck==isFullTime)
-	    	{
-	    		System.out.println("Employee is Present for Full time");
-	    		empHour=8;
-	    	}
-	    	else if(empCheck==isPartTime)
-	    	{
-	    		System.out.println("Employee is Present for Part Time");
-	    		empHour=4;
-	    	}
-	    	else
-	    	{
-	    		System.out.println("Employee is Absent");
-	    	}
-	    	empWage=empHour*empRatePerHour;
-	    	System.out.println("Employee Wage: " + empWage);
-	    	
-	    }
-	    public static void main(String[] args) {
-	    	PartTime emp = new PartTime(1,2, 20);
-	    	emp.empWage();
-			
+	public int empCheck() {
+		int empHour = 0;
+		int empCheck = (int) ((Math.random() * 10) % 3);
+
+		switch (empCheck) {
+		case ISFULLTIME:
+			System.out.println("Employee is Present for Full Time");
+			empHour = 8;
+			break;
+
+		case ISPARTTIME:
+			System.out.println("Employee is Present for Part Time");
+			empHour = 4;
+			break;
+
+		default:
+			System.out.println("Employee is Absent");
+			empHour = 0;
 		}
+		return empHour;
+
+	}
+
+	public static void main(String[] args) {
+		EmployeeWage emp = new EmployeeWage(20);
+		emp.empWage();
+
+	}	  
 }
