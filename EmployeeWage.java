@@ -1,27 +1,35 @@
 public class EmployeeWage
 {
-   
-    private  int isPresent;
-
-    public EmployeeWage(int isPresnent)
-    {
-    	this.isPresent=isPresent;
-    }
-       //to generate random values	
-	public void randomCheck() {
-		double empCheck = (int) ((Math.random() * 10) % 2);
-		if (empCheck == isPresent) {
-			System.out.println("Employee is Present");
-		} else {
-			System.out.println("employee is Absent");
-		}
-	}
-
-	public static void main(String[] args) {
-		
-		//printing welcome message
-		System.out.println("Welcome to Employee Wage Computation");
-		EmployeeWage emp = new EmployeeWage(1);
-		emp.randomCheck();
-	}
+     private  int isPresent;
+	 private  int empRatePerHour;
+	 
+	     public EmployeeWage(int isPresent , int empRatePerHour  )
+	     {
+	    	 this.isPresent=isPresent;
+	    	 this.empRatePerHour=empRatePerHour;
+	     }
+	     
+	    public void empWage()
+	    {
+	    	int empWage;
+	    	int empHour=0;
+	    	double empCheck = (int) ((Math.random()*10)%2);
+	    	if(empCheck==isPresent)
+	    	{
+	    		System.out.println("Employee is Present");
+	    		empHour=8;
+	    	}
+	    	else
+	    	{
+	    		System.out.println("Employee is Absent");
+	    	}
+	    	empWage=empHour*empRatePerHour;
+	    	System.out.println("Employee Wage: " + empWage);
+	    	
+	    }
+	    public static void main(String[] args) {
+	    	EmployeeWage emp = new EmployeeWage(1 , 20);
+	    	emp.empWage();
+			
+	} 
 }
