@@ -1,37 +1,49 @@
 public class EmployeeWage
 {
-        //constants
-	private  final int IS_FULL_TIME = 1;
-	private  final int IS_PART_TIME = 2;
-	
-	//variables
-	private  final int empRatePerHour;
-	private  final int totalDays;
-	
-	public EmployeeWage(int empRatePerHour , int totalDays)
-	{
-		this.empRatePerHour=empRatePerHour;
-		this.totalDays=totalDays;
-	}
-	
-	//method to calculate wage
-	public void empWage() {
-		int totalEmpWage=0;
-		for ( int day=1 ; day<=totalDays ; day++)
+//constants
+		private  final int IS_FULL_TIME = 1;
+		private  final int IS_PART_TIME = 2;
+		
+		//variables
+		private  final int empRatePerHour;
+		private  final int totalDays;
+		private  final int maxHourInMonth;
+		
+		public EmployeeWage(int empRatePerHour , int totalDays , int maxHourInMonth)
 		{
-		int empHour = empCheck();
-		int empWage = empHour * empRatePerHour;
-		totalEmpWage=totalEmpWage+empWage;
-		System.out.println("day: "+ day + " Employee Wage: "+ empWage);
+			this.empRatePerHour=empRatePerHour;
+			this.totalDays=totalDays;
+			this.maxHourInMonth=maxHourInMonth;
 		}
-		System.out.println( "Total Employee Wage: " + totalEmpWage);
+
+
+	    // method to calculate employee wage
+	    public void empWage() {
+
+		// variables
+		int totalEmpWage = 0;
+		int totalEmpHrs = 0;
+		int totalWorkingDays = 0;
+
+		// while is used for till a condition type
+		while (totalEmpHrs < maxHourInMonth && totalWorkingDays < totalDays) {
+
+			totalWorkingDays++;
+			final int empHour = empCheck();
+			final int empWage = empHour * empRatePerHour;
+			totalEmpHrs = totalEmpHrs + empHour;
+			totalEmpWage = totalEmpWage + empWage;
+			System.out.println("day: " + totalWorkingDays + " Employee Wage: " + empWage);
+		}
+		System.out.println("Total Employee Wage: " + totalEmpWage);
 	}
 
-	 //method return type is integer
+	// empCheck method to get empHour
 	public int empCheck() {
+
 		int empHour = 0;
 		int empCheck = (int) ((Math.random() * 10) % 3);
-		switch (empCheck)  {
+		switch (empCheck) {
 		case IS_FULL_TIME:
 			System.out.println("Employee is Present for Full Time");
 			empHour = 8;
@@ -50,8 +62,10 @@ public class EmployeeWage
 
 	}
 
+	// main method to create an object to class and call method
 	public static void main(String[] args) {
-		EmployeeWage emp = new EmployeeWage(20, 20);
+		System.out.println("Welcome to Employee Wage Computation");
+		EmployeeWage emp = new EmployeeWage(20, 20, 100);
 		emp.empWage();
 
 	}
